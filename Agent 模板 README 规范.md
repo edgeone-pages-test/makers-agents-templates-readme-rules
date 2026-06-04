@@ -2,7 +2,7 @@
 
 > 本文给所有 Agent 模板仓库（供用户 clone / 一键部署）提供**统一的 README 结构、填写规范，以及一段可直接交给 AI 的"起手 Prompt"**。
 >
-> - **README 默认英文，并提供中文版入口**：英文写在 `README.md`，中文写在 `README_zh-CN.md`，在标题下加一行语言切换互链（参考 `edgeone-pages-test/vibe-coding-agent`）。本规范说明用中文，供模板作者参考。
+> - **README 用英文**（`README.md`，仓库面向 GitHub 国际开发者）。本规范说明用中文，供模板作者参考。
 > - 对标 GitHub 专业开源仓库：开头一眼说清"这是什么 / 哪类 Makers Agents 模板 / 什么框架"，中间有一键部署按钮，环境变量讲清取值与获取方式。
 
 ---
@@ -11,7 +11,7 @@
 
 1. 在你的 AI 编程助手（CodeBuddy / Cursor / Claude Code 等）里**打开你负责的模板仓库**，确保 AI 能读取仓库代码。
 2. 把**本文档整篇**作为上下文丢给 AI，再复制下面 **【一、起手 Prompt】** 整段发给它。
-3. AI 会自动读你的仓库代码，生成英文 `README.md` 与中文 `README_zh-CN.md`（两份内容对应、互相链接）。你只需 review 少数标了 `<!-- TODO: confirm -->` 的人工确认项（展示名 / 分类 / 预览图），其余字段都从代码推断填好。
+3. AI 会自动读你的仓库代码，生成英文 `README.md`。你只需 review 少数标了 `<!-- TODO: confirm -->` 的人工确认项（展示名 / 分类 / 预览图 / 文档链接 slug），其余字段都从代码推断填好。
 
 > 你**不需要手写任何额外说明**——起手 Prompt 已包含全部规则。
 
@@ -43,8 +43,8 @@
 - Category 为 Quick Start（纯框架 starter）→ 走精简版，可省略 How It Works。
 - 其余分类（Coding / Chat / File Processing / Content / Orchestration / Scheduled）→ 走完整版，必须写好 How It Works，且 Overview 更聚焦业务价值。
 
-## 第二步：按以下结构输出（英文版结构，中文版逐节对应翻译）
-1. # <展示名>，下一行语言切换互链，再跟一句话描述：做什么 + 基于什么框架 + on EdgeOne Makers。
+## 第二步：按以下结构输出英文 README
+1. # <展示名>，紧跟一句话描述：做什么 + 基于什么框架 + on EdgeOne Makers。
 2. Meta 行：**Framework:** … · **Category:** … · **Language:** …
 3. 部署按钮（原样使用，仅替换尖括号）：
    [![Deploy to EdgeOne Makers](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/makers/new?template=<仓库名>&from=within&fromAgent=1&agentLang=<typescript|python>)
@@ -71,14 +71,15 @@
    - 用到的工具 / 沙箱 / 对话存储：说明各自承担什么，沙箱凭证由运行时自动注入、无需本地配置。
    - 关键路由（如 /chat）与 conversation_id 的传递方式（请求头 Markers-Conversation-Id）。
    - 相关运行参数（如 edgeone.json 的 agents.timeout、agents.sandbox.timeout）。
-10. ## Resources：链接 Makers Agents 文档、Quick Start、Makers Models。
+10. ## Resources：链接 Makers Agents 文档、Quick Start、Makers Models。文档链接统一用英文站格式 https://pages.edgeone.ai/document/<slug>（英文不带 /zh；中文文档才带 /zh）。若不确定具体 slug，保留合理猜测并在该行加 <!-- TODO: confirm slug -->。
 11. ## License。
 
 ## 硬性要求
-- README.md 全英文、README_zh-CN.md 全中文，两份结构一致；均技术向、无营销腔。
+- 全英文、技术向、无营销腔。
 - 不要描述 AI_GATEWAY_* 是否自动注入，只讲如何获取与填写。
-- 凡无法从代码推断的（展示名的优雅写法 / Category 分类 / 预览图），给出最合理猜测，并在该处留 <!-- TODO: confirm -->。
-- 直接输出 README.md 与 README_zh-CN.md 两份全文，不要额外解释。
+- 文档链接用英文站格式 https://pages.edgeone.ai/document/<slug>（不带 /zh）。
+- 凡无法从代码推断的（展示名的优雅写法 / Category 分类 / 预览图 / 文档 slug），给出最合理猜测，并在该处留 <!-- TODO: confirm -->。
+- 直接输出 README.md 全文，不要额外解释。
 ````
 
 ---
@@ -348,7 +349,7 @@ MIT
 ````
 
 > 两个范例对应的现有仓库可直接参考：
-> - 业务模板：[edgeone-pages-test/vibe-coding-agent](https://github.com/edgeone-pages-test/vibe-coding-agent)（一键部署按钮 + 完整工作流 + 中英双 README）
+> - 业务模板：[edgeone-pages-test/vibe-coding-agent](https://github.com/edgeone-pages-test/vibe-coding-agent)（一键部署按钮 + 完整工作流）
 > - starter：[q153877011/openai-agents-test](https://github.com/q153877011/openai-agents-test)
 
 ---
