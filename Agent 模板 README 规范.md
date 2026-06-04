@@ -20,12 +20,7 @@
 ## 一、起手 Prompt（复制即用）
 
 ````text
-你是一名资深开源项目维护者。请为「当前所在的 EdgeOne Makers Agent 模板仓库」撰写专业的 README，对标 GitHub 上高质量开源仓库。需要产出两份、内容对应：
-- README.md：英文（默认）
-- README_zh-CN.md：简体中文
-两份在标题下都加一行语言切换互链：
-- README.md：**Language:** English | [简体中文](./README_zh-CN.md)
-- README_zh-CN.md：**语言：** [English](./README.md) | 简体中文
+你是一名资深开源项目维护者。请为「当前所在的 EdgeOne Makers Agent 模板仓库」撰写专业的 README，对标 GitHub 上高质量开源仓库，需要产出一份英文 README.md。
 
 ## 第一步：通读当前仓库，从代码提取信息（不要编造）
 - edgeone.json：读 agents.framework（映射为框架展示名）、agents.dir。
@@ -92,8 +87,6 @@
 
 ````markdown
 # {{Template Display Name}}
-
-**Language:** English | [简体中文](./README_zh-CN.md)
 
 > {{One sentence: what this agent does, built with {{Framework}} on EdgeOne Makers.}}
 
@@ -167,13 +160,11 @@ Open `http://localhost:8080/agent-metrics` for the local observability panel.
 {{MIT}}
 ````
 
-> 中文版 `README_zh-CN.md` 逐节对应翻译，标题下语言切换行改为：`**语言：** [English](./README.md) | 简体中文`。
-
 ---
 
 ## 三、字段填写规范
 
-- **双语**：英文写在 `README.md`、中文写在 `README_zh-CN.md`，标题下加语言切换互链；两份结构一致、逐节对应。
+- **英文即可**：只需一份 `README.md`。
 - **标题与一句话描述**：标题用展示名（如 `OpenAI Agents Starter`），非仓库 slug；描述 = 做什么 + 框架 + on EdgeOne Makers，技术向无营销腔。
 - **Meta 行**：`Framework` 与控制台卡片框架标签一致，无框架写 `None (raw Node/Python)`；`Category` 取控制台分类；`Language` 为 `TypeScript`/`Python`。
 - **Deploy 按钮**：徽章固定 `https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg`，文案统一 `Deploy to EdgeOne Makers`；链接 `https://edgeone.ai/makers/new?template=<仓库名>&from=within&fromAgent=1&agentLang=<typescript|python>`。
@@ -190,8 +181,6 @@ Open `http://localhost:8080/agent-metrics` for the local observability panel.
 
 ````markdown
 # OpenAI Agents Starter
-
-**Language:** English | [简体中文](./README_zh-CN.md)
 
 > A streaming chat agent built with the OpenAI Agents SDK on EdgeOne Makers — with custom tools, session memory, and stop-generation.
 
@@ -268,8 +257,6 @@ MIT
 
 ````markdown
 # Web Dev Agent
-
-**Language:** English | [简体中文](./README_zh-CN.md)
 
 > A sandbox-based web development agent built with the Claude Agent SDK on EdgeOne Makers — describe what you want, and it writes, previews, verifies, and iterates a live web app.
 
@@ -368,7 +355,7 @@ MIT
 
 ## 五、已确认口径
 
-- **README 双语**：默认英文 `README.md`，附中文 `README_zh-CN.md`，标题下语言切换互链。
+- **README 英文**：默认英文 `README.md`，无需中文 `README_zh-CN.md`。
 - **环境变量不提自动注入**：README 只讲如何获取与填写 `AI_GATEWAY_*`，不描述是否自动注入（注入条件依赖创建方式，理解成本高，统一不写）。
 - **edgeone.json 中 sandbox 为嵌套写法** `agents.sandbox.timeout`（非顶层），`timeout` 区间 `300 ~ 3600`，已与官方 Agents 文档对齐。
 - **Deploy 链接域名统一用** `edgeone.ai/makers/new`；徽章文案统一 `Deploy to EdgeOne Makers`。
