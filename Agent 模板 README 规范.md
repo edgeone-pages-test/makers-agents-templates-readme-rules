@@ -25,7 +25,7 @@
 ## 第一步：通读当前仓库，从代码提取信息（不要编造）
 - edgeone.json：读 agents.framework（映射为框架展示名）、agents.dir。
 - 语言：根据入口文件后缀与 package.json / requirements.txt 判断 TypeScript 还是 Python。
-- .env.example：提取所有环境变量。
+- .env.example：提取所有环境变量。注意识别是否用到平台内置搜索能力——.env.example 含 WSA_API_KEY，或代码里用到 web_search 工具，则该模板属于“搜索类模板”。
 - package.json：取仓库名（用于部署链接的 template= 参数）与运行脚本。
 - Agent 入口（agents/<name>/index.*）、tools/ 目录、对话存储与沙箱用法：提炼能力亮点与工作流。
 - 路由：从 agents/ 与 cloud-functions/ 下的文件名推断对外路由（文件即路由）。
@@ -63,6 +63,14 @@
    说明：内置模型免费限量、适合验证；生产请绑定自费厂商（BYOK）。
    （不要描述环境变量是否“自动注入”——统一只讲如何获取与填写。）
    若代码里还读取 ANTHROPIC_* / DEEPSEEK_* 等兜底变量，再补一小段 “Provider fallbacks” 说明。
+   【仅搜索类模板】若该模板用到平台内置搜索能力（见第一步判断），在环境变量表追加一行：
+     - WSA_API_KEY | No | Tencent Cloud Web Search API (WSA) key for the platform's built-in search tool.
+   并补一节 “### How to get WSA_API_KEY”：
+     1) Enable Web Search (WSA) in the Tencent Cloud WSA Console (https://console.cloud.tencent.com/wsapi/index)
+     2) Obtain the API Key and set it as WSA_API_KEY
+     3) Reference: WSA API Documentation (https://cloud.tencent.com/document/product/1806/130615)
+   再补一句：如不使用腾讯云 WSA，可将 web_search 工具实现替换为第三方搜索服务（如 Exa、Tavily）。
+   （非搜索类模板不要添加 WSA_API_KEY 行与该小节。）
 7. ## Local Development：列出前置依赖；命令依次为 npm install、cp .env.example .env、edgeone makers dev；并给出本地可观测面板地址 http://localhost:8080/agent-metrics。
 8. ## Project Structure：目录树代码块 + “Files prefixed with _ are private modules — not exposed as public routes.”
 9. ## How It Works（业务模板必写，starter 可省）：把 agent 的端到端流程讲清楚，建议覆盖：
@@ -125,6 +133,19 @@
 
 Built-in models (`@makers/deepseek-v4-flash`, `@makers/hy3-preview`, `@makers/minimax-m2.7`) are free and rate-limited — great for prototyping. For production, bind your own provider key (BYOK) in the console.
 
+<!-- Search-enabled templates only — if this template uses the built-in web_search tool (WSA_API_KEY appears in .env.example), add a `| WSA_API_KEY | No | Tencent Cloud Web Search API (WSA) key for the platform's built-in search tool. |` row to the table above AND include the section below. Otherwise omit both.
+
+### How to get `WSA_API_KEY`
+
+The platform provides a built-in search tool powered by Tencent Cloud Web Search API (WSA). To use it:
+
+1. Enable **Web Search (WSA)** in the [Tencent Cloud WSA Console](https://console.cloud.tencent.com/wsapi/index).
+2. Obtain your API Key and set it as `WSA_API_KEY`.
+3. See the [WSA API Documentation](https://cloud.tencent.com/document/product/1806/130615) for details.
+
+> Prefer a different provider? Replace the `web_search` tool implementation with a third-party search service (e.g. Exa, Tavily).
+-->
+
 ## Local Development
 
 **Prerequisites:** Node.js, npm{{, Python 3.x for Python templates}}
@@ -169,7 +190,7 @@ Open `http://localhost:8080/agent-metrics` for the local observability panel.
 - **标题与一句话描述**：标题用展示名（如 `OpenAI Agents Starter`），非仓库 slug；描述 = 做什么 + 框架 + on EdgeOne Makers，技术向无营销腔。
 - **Meta 行**：`Framework` 与控制台卡片框架标签一致，无框架写 `None (raw Node/Python)`；`Category` 取控制台分类；`Language` 为 `TypeScript`/`Python`。
 - **Deploy 按钮**：徽章固定 `https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg`，文案统一 `Deploy to EdgeOne Makers`；链接 `https://edgeone.ai/makers/new?template=<仓库名>&from=within&fromAgent=1&agentLang=<typescript|python>`。
-- **环境变量（重点）**：标准三件套 `AI_GATEWAY_API_KEY`（必填）/ `AI_GATEWAY_BASE_URL`（必填）/ `AI_GATEWAY_MODEL`（可选，默认 `@makers/hy3-preview`）；基于 OpenAI 兼容标准可自定义；必须保留 "How to get" 小节；**不描述是否自动注入**，只讲获取与填写；仓库需附 `.env.example`，变量名与表格一致。
+- **环境变量（重点）**：标准三件套 `AI_GATEWAY_API_KEY`（必填）/ `AI_GATEWAY_BASE_URL`（必填）/ `AI_GATEWAY_MODEL`（可选，默认 `@makers/hy3-preview`）；基于 OpenAI 兼容标准可自定义；必须保留 "How to get" 小节；**不描述是否自动注入**，只讲获取与填写；仓库需附 `.env.example`，变量名与表格一致。**仅搜索类模板**（用到平台内置 `web_search`，即 `.env.example` 含 `WSA_API_KEY`）才追加一行可选变量 `WSA_API_KEY`（Required: No）并补 “How to get WSA_API_KEY” 小节——获取走腾讯云 WSA 控制台，且支持替换为第三方搜索服务（Exa / Tavily）；非搜索模板不加此变量。
 - **本地开发**：统一 `edgeone makers dev`；Python 模板补 `Python 3.x` 与安装命令。
 - **项目结构**：`text` 代码块画目录树，`_` 前缀私有模块要说明。
 - **How It Works（业务模板重点）**：starter 可省；业务模板必须写清端到端流程——运行模式与会话粘性、分步工作流、用到的工具/沙箱/对话存储、关键路由与 `conversation_id` 传递、相关运行参数。这是业务模板 README 质量的关键，不能只写一句带过。
