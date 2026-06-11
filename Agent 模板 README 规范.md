@@ -56,7 +56,7 @@
    - AI_GATEWAY_MODEL | No | Model ID. Defaults to @makers/hy3-preview (a free built-in model).
    表格下补一句：This template follows the OpenAI-compatible standard — point these at Makers Models or any compatible provider.
    随后写小节 “### How to get AI_GATEWAY_API_KEY”，给出四步：
-     1) Open the Makers Console (https://console.cloud.tencent.com/edgeone/makers)
+     1) Open the Makers Console (https://edgeone.ai/makers/new?s_url=https://console.tencentcloud.com/edgeone/makers)
      2) Sign in and enable Makers
      3) Go to Makers → Models → API Key and create a key
      4) Copy it into AI_GATEWAY_API_KEY
@@ -126,7 +126,7 @@
 
 ### How to get `AI_GATEWAY_API_KEY`
 
-1. Open the [Makers Console](https://console.cloud.tencent.com/edgeone/makers).
+1. Open the [Makers Console](https://edgeone.ai/makers/new?s_url=https://console.tencentcloud.com/edgeone/makers).
 2. Sign in and enable Makers.
 3. Go to **Makers → Models → API Key** and create a key.
 4. Copy it into `AI_GATEWAY_API_KEY` (set `AI_GATEWAY_BASE_URL` to `https://ai-gateway.edgeone.link/v1`).
@@ -231,7 +231,7 @@ A minimal full-stack template that shows how to build a production-shaped chat a
 
 ### How to get `AI_GATEWAY_API_KEY`
 
-1. Open the [Makers Console](https://console.cloud.tencent.com/edgeone/makers).
+1. Open the [Makers Console](https://edgeone.ai/makers/new?s_url=https://console.tencentcloud.com/edgeone/makers).
 2. Sign in and enable Makers.
 3. Go to **Makers → Models → API Key** and create a key.
 4. Copy it into `AI_GATEWAY_API_KEY`.
@@ -310,7 +310,7 @@ Web Dev Agent turns a natural-language request into a running web app. For each 
 
 ### How to get `AI_GATEWAY_API_KEY`
 
-1. Open the [Makers Console](https://console.cloud.tencent.com/edgeone/makers).
+1. Open the [Makers Console](https://edgeone.ai/makers/new?s_url=https://console.tencentcloud.com/edgeone/makers).
 2. Sign in and enable Makers.
 3. Go to **Makers → Models → API Key** and create a key.
 4. Copy it into `AI_GATEWAY_API_KEY`.
@@ -380,4 +380,5 @@ MIT
 - **README 英文**：默认英文 `README.md`，无需中文 `README_zh-CN.md`。
 - **环境变量不提自动注入**：README 只讲如何获取与填写 `AI_GATEWAY_*`，不描述是否自动注入（注入条件依赖创建方式，理解成本高，统一不写）。
 - **edgeone.json 中 sandbox 为嵌套写法** `agents.sandbox.timeout`（非顶层），`timeout` 区间 `300 ~ 3600`，已与官方 Agents 文档对齐。
-- **Deploy 链接域名统一用** `edgeone.ai/makers/new`；徽章文案统一 `Deploy to EdgeOne Makers`。
+- **域名国内外分流**：英文 README（面向国际）的 Deploy 按钮用 `edgeone.ai/makers/new`、Makers Console 链接用 `edgeone.ai/makers/new?s_url=https://console.tencentcloud.com/edgeone/makers`（国际站）；若另出中文/国内版本，则统一用国内站 `console.cloud.tencent.com/edgeone/makers(/new)`。徽章文案统一 `Deploy to EdgeOne Makers`。
+- **环境变量三件套必须列全**：`AI_GATEWAY_API_KEY` / `AI_GATEWAY_BASE_URL` / `AI_GATEWAY_MODEL` 三行都要保留，`AI_GATEWAY_MODEL` 为可选（默认 `@makers/hy3-preview`），不可省略该行。
