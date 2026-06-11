@@ -32,8 +32,8 @@
 - 目录树：用于 Project Structure。
 
 ## 框架名映射
-- claude-sdk → Claude Agent SDK
-- openai-sdk → OpenAI Agents SDK
+- claude-agent-sdk → Claude Agent SDK
+- openai-agents-sdk → OpenAI Agents SDK
 - langgraph → LangGraph
 - crewai → CrewAI
 - deepagents → Deep Agents
@@ -50,7 +50,7 @@
    [![Deploy to EdgeOne Makers](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/makers/new?template=<仓库名>&from=within&fromAgent=1&agentLang=<typescript|python>)
 4. （可选，建议）预览图占位：![preview](./assets/preview.png)
 5. ## Overview：2-4 句简介 + 3-5 条 “**能力** — 说明” 形式的 bullet。业务模板的能力要落到业务价值（解决什么问题、典型用法）。
-6. ## Environment Variables：一个三列表（Variable | Required | Description），必须包含以下三行：
+6. ## Environment Variables：一个三列表（Variable | Required | Description）。必填两行 `AI_GATEWAY_API_KEY` / `AI_GATEWAY_BASE_URL`；`AI_GATEWAY_MODEL` 可选、非强制，按需列出（列出时形如下例）：
    - AI_GATEWAY_API_KEY | Yes | Model gateway API key. Use your Makers Models API Key, or any OpenAI-compatible provider key.
    - AI_GATEWAY_BASE_URL | Yes | Gateway base URL. For Makers Models, use https://ai-gateway.edgeone.link/v1.
    - AI_GATEWAY_MODEL | No | Model ID. Defaults to @makers/hy3-preview (a free built-in model).
@@ -190,7 +190,7 @@ Open `http://localhost:8080/agent-metrics` for the local observability panel.
 - **标题与一句话描述**：标题用展示名（如 `OpenAI Agents Starter`），非仓库 slug；描述 = 做什么 + 框架 + on EdgeOne Makers，技术向无营销腔。
 - **Meta 行**：`Framework` 与控制台卡片框架标签一致，无框架写 `None (raw Node/Python)`；`Category` 取控制台分类；`Language` 为 `TypeScript`/`Python`。
 - **Deploy 按钮**：徽章固定 `https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg`，文案统一 `Deploy to EdgeOne Makers`；链接 `https://edgeone.ai/makers/new?template=<仓库名>&from=within&fromAgent=1&agentLang=<typescript|python>`。
-- **环境变量（重点）**：标准三件套 `AI_GATEWAY_API_KEY`（必填）/ `AI_GATEWAY_BASE_URL`（必填）/ `AI_GATEWAY_MODEL`（可选，默认 `@makers/hy3-preview`）；基于 OpenAI 兼容标准可自定义；必须保留 "How to get" 小节；**不描述是否自动注入**，只讲获取与填写；仓库需附 `.env.example`，变量名与表格一致。**仅搜索类模板**（用到平台内置 `web_search`，即 `.env.example` 含 `WSA_API_KEY`）才追加一行可选变量 `WSA_API_KEY`（Required: No）并补 “How to get WSA_API_KEY” 小节——获取走腾讯云 WSA 控制台，且支持替换为第三方搜索服务（Exa / Tavily）；非搜索模板不加此变量。
+- **环境变量（重点）**：必填 `AI_GATEWAY_API_KEY` / `AI_GATEWAY_BASE_URL`；`AI_GATEWAY_MODEL` 可选、**非强制**（默认 `@makers/hy3-preview`），可按需列出或省略；基于 OpenAI 兼容标准可自定义；必须保留 "How to get" 小节；**不描述是否自动注入**，只讲获取与填写；仓库需附 `.env.example`，变量名与表格一致。**仅搜索类模板**（用到平台内置 `web_search`，即 `.env.example` 含 `WSA_API_KEY`）才追加一行可选变量 `WSA_API_KEY`（Required: No）并补 “How to get WSA_API_KEY” 小节——获取走腾讯云 WSA 控制台，且支持替换为第三方搜索服务（Exa / Tavily）；非搜索模板不加此变量。
 - **本地开发**：统一 `edgeone makers dev`；Python 模板补 `Python 3.x` 与安装命令。
 - **项目结构**：`text` 代码块画目录树，`_` 前缀私有模块要说明。
 - **How It Works（业务模板重点）**：starter 可省；业务模板必须写清端到端流程——运行模式与会话粘性、分步工作流、用到的工具/沙箱/对话存储、关键路由与 `conversation_id` 传递、相关运行参数。这是业务模板 README 质量的关键，不能只写一句带过。
@@ -381,4 +381,4 @@ MIT
 - **环境变量不提自动注入**：README 只讲如何获取与填写 `AI_GATEWAY_*`，不描述是否自动注入（注入条件依赖创建方式，理解成本高，统一不写）。
 - **edgeone.json 中 sandbox 为嵌套写法** `agents.sandbox.timeout`（非顶层），`timeout` 区间 `300 ~ 3600`，已与官方 Agents 文档对齐。
 - **域名国内外分流**：英文 README（面向国际）的 Deploy 按钮用 `edgeone.ai/makers/new`、Makers Console 链接用 `edgeone.ai/makers/new?s_url=https://console.tencentcloud.com/edgeone/makers`（国际站）；若另出中文/国内版本，则统一用国内站 `console.cloud.tencent.com/edgeone/makers(/new)`。徽章文案统一 `Deploy to EdgeOne Makers`。
-- **环境变量三件套必须列全**：`AI_GATEWAY_API_KEY` / `AI_GATEWAY_BASE_URL` / `AI_GATEWAY_MODEL` 三行都要保留，`AI_GATEWAY_MODEL` 为可选（默认 `@makers/hy3-preview`），不可省略该行。
+- **环境变量必填项**：仅 `AI_GATEWAY_API_KEY` / `AI_GATEWAY_BASE_URL` 两行必填；`AI_GATEWAY_MODEL` 为可选、**非强制**（默认 `@makers/hy3-preview`），模板可按需列出或省略。
